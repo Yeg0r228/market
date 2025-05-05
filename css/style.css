@@ -6,7 +6,7 @@ body {
 }
 
 content {
-  width: 460px;
+  width: 500px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -22,12 +22,13 @@ div {
   color: white;
   width: auto;
   padding: 10px;
-  border-radius: 4px;
+  border-radius: 5px;
+
   text-transform: uppercase;
-  font-size: 28px;
+  font-size: 20px;
   text-align: center;
   font-weight: bold;
-  letter-spacing: 1px;
+  letter-spacing: 3px;
 }
 
 .items {
@@ -39,56 +40,77 @@ div {
 
 .item {
   width: 200px;
-  height: 420px;
-  margin-bottom: 10px;
+  margin: 10px;
   padding: 10px;
-  border: 1px solid rgb(194, 194, 194);
-  border-radius: 5px;
-  box-shadow: 0 0 7px rgba(0, 0, 0, 0.3);
-  text-align: left;
+  border: 1px solid transparent; /* Прозора обводка */
+  border-radius: 10px; /* Закруглення кутів */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Додаємо тінь */
   background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  text-align: center;
+  transition: box-shadow 0.3s ease; /* Плавний перехід для тіні */
 }
 
-.item img {
+.item:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Збільшення тіні при наведенні */
+}
+
+.item-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.item-image img {
   width: 100%;
   height: auto;
-  margin: 10px 0;
+  margin-bottom: 10px;
 }
 
 .item-details {
-  text-align: right;
-}
-
-.rating {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  gap: 5px;
-  font-size: 20px;
-  
+  align-items: flex-start;
 }
 
 .price-wrapper {
   display: flex;
-  justify-content: flex-end;
-  gap: 10px;
+  justify-content: space-between; /* Ціна ліворуч, рейтинг праворуч */
   align-items: center;
-  border: 1px solid darkgray;
+  position: relative;
+  width: 100%;
+  border: 1px solid rgb(194, 194, 194); /* Обводка тільки для цінника */
+  border-radius: 5px; /* Закруглення кутів для цінника */
+  padding: 5px;
 }
 
 .old-price {
-  text-decoration: line-through;
-  color: gray;
   font-size: 14px;
+  color: gray;
+  text-decoration: line-through;
 }
 
 .current-price {
   font-size: 18px;
   font-weight: bold;
-  color: rgb(0, 0, 0);
+  color: black;
+  transition: transform 0.3s ease, color 0.3s ease; /* Плавний перехід */
+}
+
+.current-price:hover {
+  transform: scale(1.1); /* Збільшення цінника при наведенні */
+  color: rgb(235, 48, 48); /* Зміна кольору на червоний */
+}
+
+.rating {
+  display: flex;
+  flex-direction: column; /* Розташування іконок вертикально */
+  align-items: flex-end; /* Вирівнювання праворуч */
+  gap: 5px; /* Відстань між іконками */
+  margin-bottom: 5px; /* Відступ від цінника */
+  border: none; /* Прибрано обводку */
 }
 
 .discount {
@@ -98,10 +120,10 @@ div {
   padding: 5px;
   border-radius: 4px;
   margin-top: 10px;
-  border: 1px solid darkgray;
+  text-align: center;
 }
 
-.discount span {
+.discount .price {
   font-size: 18px;
 }
 
@@ -124,8 +146,39 @@ div {
   color: rgb(120, 120, 120);
 }
 
+/* Ефект при наведенні на зображення */
 .item img {
   width: 170px;
   height: auto;
   margin: 10px 0;
+  cursor: pointer; /* Вказівник змінюється на руку */
+  transition: transform 0.3s ease; /* Плавний перехід */
+}
+
+.item img:hover {
+  transform: scale(1.05); /* Легке збільшення при наведенні */
+}
+
+/* Стилі для модального вікна */
+.modal {
+  display: none; /* Приховано за замовчуванням */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Напівпрозорий чорний фон */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+}
+
+.modal.active {
+  display: flex; /* Показуємо модальне вікно */
 }
